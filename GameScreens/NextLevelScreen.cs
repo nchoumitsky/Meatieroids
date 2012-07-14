@@ -69,7 +69,29 @@ namespace MeatieroidsWindows
 
         public override void Update(GameTime gameTime, bool otherScreenHasFocus, bool coveredByOtherScreen)
         {
+            if (isNetworkGame)
+            {
+                UpdateNetworkGameplay();
 
+                if (ready && netManager.RemoteReady && netManager.netSession.IsHost)
+                {
+                    netManager.SendStartLevelMessage();
+                    ExitScreen();
+                }
+            }
+            else
+            {
+                if (ready)
+                {
+                    ExitScreen();
+                }
+            }
+
+            base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
+        }
+
+        private void UpdateNetworkGameplay()
+        {
             switch (netManager.GetMessageType())
             {
                 case MessageType.StartLevel:
@@ -77,7 +99,7 @@ namespace MeatieroidsWindows
                     break;
                 case MessageType.Ready:
                     netManager.RemoteReady = true;
-                    if(!ready)
+                    if (!ready)
                         enterText = "Remote Pasta ready for meat... are you?";
                     break;
                 case MessageType.EndGame:
@@ -86,13 +108,6 @@ namespace MeatieroidsWindows
                     netManager.CleanUpNetwork();
                     break;
             }
-            if(ready && netManager.RemoteReady && netManager.netSession.IsHost)
-            {
-                netManager.SendStartLevelMessage();
-                ExitScreen();
-            }
-
-            base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
         }
 
         public override void Draw(GameTime gameTime)

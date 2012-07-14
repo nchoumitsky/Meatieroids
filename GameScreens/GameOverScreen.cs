@@ -72,12 +72,15 @@ namespace MeatieroidsWindows
         {
             if (input.IsMenuCancel())
             {
-                foreach (SignedInGamer signedInGamer in SignedInGamer.SignedInGamers)
+                if (isNetworkGame)
                 {
-                    signedInGamer.Presence.PresenceMode = GamerPresenceMode.WaitingInLobby;
+                    foreach (SignedInGamer signedInGamer in SignedInGamer.SignedInGamers)
+                    {
+                        signedInGamer.Presence.PresenceMode = GamerPresenceMode.WaitingInLobby;
+                    }
                 }
-                //ScreenManager.AddScreen(new BackgroundScreen());
-                //ScreenManager.AddScreen(new MainMenuScreen());
+                ScreenManager.AddScreen(new BackgroundScreen());
+                ScreenManager.AddScreen(new MainMenuScreen());
                 ExitScreen();
             }
 
