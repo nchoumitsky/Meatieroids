@@ -12,11 +12,14 @@ namespace MeatieroidsWindows
 {
     class GameOverScreen : GameScreen
     {
-        protected string endGameMessage, score1Text, score2Text;
-        int score, networkScore;
-        SpriteFont screenFont;
-        bool isNetworkGame;
-        NetworkManager netManager;
+        protected string endGameMessage;
+        private string score1Text;
+        private string score2Text;
+        private int score;
+        private int networkScore;
+        private SpriteFont screenFont;
+        private bool isNetworkGame;
+        private NetworkManager netManager;
 
         public GameOverScreen(int score)
         {
@@ -29,7 +32,7 @@ namespace MeatieroidsWindows
 
         public GameOverScreen(int score, int networkScore, NetworkManager nManager)
         {
-            netManager = nManager;
+            this.netManager = nManager;
             this.score = score;
             this.networkScore = networkScore;
             IsPopupWindow = false;

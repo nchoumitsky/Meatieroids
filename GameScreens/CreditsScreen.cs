@@ -5,7 +5,13 @@ namespace MeatieroidsWindows
 {
     class CreditsScreen : MenuScreen
     {
-        MenuEntry createdBy, nick, lauren, dan, specialThanks, tom, exit;
+        private MenuEntry createdBy;
+        private MenuEntry nick;
+        private MenuEntry lauren;
+        private MenuEntry dan;
+        private MenuEntry specialThanks;
+        private MenuEntry tom;
+        private MenuEntry exit;
 
         public CreditsScreen()
             : base("Credits")

@@ -8,11 +8,11 @@ namespace MeatieroidsWindows
     // this screen forms the background for the menu screens
     class BackgroundScreenGame : GameScreen
     {
-        ContentManager content;
-        Texture2D backgroundTexture;
+        private ContentManager content;
+        private Texture2D backgroundTexture;
 
         // screen variables
-        Color overlayColor = Color.Firebrick;
+        private Color overlayColor = Color.Firebrick;
 
         public BackgroundScreenGame()
         {

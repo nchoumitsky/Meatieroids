@@ -8,8 +8,8 @@ namespace MeatieroidsWindows
     // this screen forms the background for the menu screens
     class BackgroundScreen : GameScreen
     {
-        ContentManager content;
-        Texture2D backgroundTexture;
+        private ContentManager content;
+        private Texture2D backgroundTexture;
 
         public BackgroundScreen()
         {

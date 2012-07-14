@@ -10,10 +10,10 @@ namespace MeatieroidsWindows
     {
         protected string message;
         protected string enterText;
-        SpriteFont screenFont;
-        bool ready;
-        bool isNetworkGame;
-        NetworkManager netManager;
+        private SpriteFont screenFont;
+        private bool ready;
+        private bool isNetworkGame;
+        private NetworkManager netManager;
 
         public NextLevelScreen()
         {
@@ -42,9 +42,9 @@ namespace MeatieroidsWindows
             ContentManager content = ScreenManager.Game.Content;
             screenFont = ScreenManager.GameFont;
         }
+
         public override void UnloadContent()
         {
-
             base.UnloadContent();
         }
 

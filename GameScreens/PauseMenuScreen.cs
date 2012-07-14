@@ -6,12 +6,12 @@ namespace MeatieroidsWindows
     {
         string promptMessage = "Are you sure you want to end the current game?";
         string acceptMessage = "Press Enter or A to quit";
-        bool ready;
-        MenuEntry resumeGameMenuEntry;
-        MenuEntry quitGameMenuEntry;
-        GameScreen screen;
-        bool isNetworkGame;
-        NetworkManager netManager;
+        private bool ready;
+        private MenuEntry resumeGameMenuEntry;
+        private MenuEntry quitGameMenuEntry;
+        private GameScreen screen;
+        private bool isNetworkGame;
+        private NetworkManager netManager;
 
         public PauseMenuScreen(GameScreen callingScreen) : base("No More Meatballs?")
         {
@@ -63,7 +63,7 @@ namespace MeatieroidsWindows
             if (isNetworkGame)
             {
                 ready = true;
-               netManager.SendUnPauseMessage();
+                netManager.SendUnPauseMessage();
                 if (!netManager.RemoteReady)
                 {
                     resumeGameMenuEntry.DisplayText = "Ready to eat, awaiting opposing pasta...";

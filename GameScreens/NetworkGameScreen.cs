@@ -12,24 +12,24 @@ namespace MeatieroidsWindows
     // This screen implements the actual game logic.
     class NetworkGameScreen : GameScreen
     {
-        ContentManager content;
-        SpriteFont screenFont;
-        SpriteManager spriteManager;
-        SoundEffect splatEffect;
+        private ContentManager content;
+        private SpriteFont screenFont;
+        private SpriteManager spriteManager;
+        private SoundEffect splatEffect;
 
         // gameplay variables
-        int level = 1;
-        int score;
-        int opponentScore;
-        int diffuculty;
-        bool spawnIsReady;
-        bool isHost;
+        private int level = 1;
+        private int score;
+        private int opponentScore;
+        private int diffuculty;
+        private bool spawnIsReady;
+        private bool isHost;
         //screen item variables and config
-        Vector2 scorePosition;
-        Vector2 levelPosition;
-        Vector2 opponentScorePosition;
-        Color textColor = Color.LightGreen;
-        NetworkManager netManager;
+        private Vector2 scorePosition;
+        private Vector2 levelPosition;
+        private Vector2 opponentScorePosition;
+        private Color textColor = Color.LightGreen;
+        private NetworkManager netManager;
 
         public NetworkGameScreen(bool host, NetworkManager nManager)
         {
@@ -79,7 +79,7 @@ namespace MeatieroidsWindows
         {
             base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
 
-            if (IsActive) //if this is the active screen
+            if (isActive) //if this is the active screen
             {
                 //We check to see if we should spawn meat.  This should only occur after the nextLevel screen
                 //is exiting or the game is starting, in both multiplayer and single player.
@@ -92,17 +92,17 @@ namespace MeatieroidsWindows
                 }
                 
                 spriteManager.UpdateSprites(gameTime);
-                collisionDetection();
+                CollisionDetection();
 
                 //Do everything related to updating network states only if we're a network game
 
                 UpdateNetworkGameplay();
                 if (spriteManager.meatList.Count == 0 && spriteManager.explodingList.Count == 0 && spriteManager.forkList.Count == 0 
                     && spriteManager.networkForkList.Count == 0 && netManager.netSession.IsHost)
-                    nextLevel();
+                    NextLevel();
 
                 else if (spriteManager.meatList.Count == 0 && spriteManager.explodingList.Count == 0 && spriteManager.forkList.Count == 0)
-                    nextLevel();
+                    NextLevel();
             }
         }
 
@@ -135,7 +135,7 @@ namespace MeatieroidsWindows
                 case MessageType.Nothing:
                     break;
                 case MessageType.FireFork:
-                    spriteManager.fireNetworkForks();
+                    spriteManager.FireNetworkForks();
                     break;
                 case MessageType.PauseGame:
                     netManager.RemoteReady = false;
@@ -162,7 +162,7 @@ namespace MeatieroidsWindows
                         spriteManager.meatList.Clear();         //messed up, due to network lag make
                     if (spriteManager.networkForkList.Count > 0)  //sure we are synced for the next level
                         spriteManager.networkForkList.Clear();
-                    nextLevel();                                
+                    NextLevel();                                
                     break;
             }
         }
@@ -185,7 +185,7 @@ namespace MeatieroidsWindows
             //if we are playing networked, let the other person know
             if (input.IsShootFork())
             {
-                spriteManager.fireForks();
+                spriteManager.FireForks();
                 netManager.SendFireForkMessage();
             }
 
@@ -218,7 +218,7 @@ namespace MeatieroidsWindows
         //bool to true, however it will not spawn until the user returns from the next level screen because the game
         //also checks the isExiting bool, which is set to true upon the AddScreen function.  If we are hosting a network
         //game, we want to let the client know that it is time to end the level by sending them the NextLevel message
-        private void nextLevel()
+        private void NextLevel()
         {
             spawnIsReady = true;
             if (level > 0)
@@ -234,10 +234,10 @@ namespace MeatieroidsWindows
         //collisions.  Depending on the result, the integer returned by the function, it
         //either adds to the scores(fork hits a meat) or it checks the amount of life and
         //either takes away one or if its ends the game
-        private void collisionDetection()
+        private void CollisionDetection()
         {
             MeatSprite oldMeat;
-            if (spriteManager.collisionDetect(out oldMeat))
+            if (spriteManager.CollisionDetect(out oldMeat))
             {
                 if (score > ScreenManager.CurrentHighScore)
                     ScreenManager.CurrentHighScore = score;

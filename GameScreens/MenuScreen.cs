@@ -7,9 +7,9 @@ namespace MeatieroidsWindows
 {
     abstract class MenuScreen : GameScreen
     {
-        List<MenuEntry> menuEntries = new List<MenuEntry>();
-        int selectedEntry = 0;
-        string menuTitle;
+        private List<MenuEntry> menuEntries = new List<MenuEntry>();
+        private int selectedEntry = 0;
+        private string menuTitle;
 
         protected IList<MenuEntry> MenuEntries
         {
@@ -18,16 +18,12 @@ namespace MeatieroidsWindows
 
         public MenuScreen(string menuTitle)
         {
-            this.menuTitle = menuTitle;
+            this.MenuTitle = menuTitle;
             TransitionOnTime = TimeSpan.FromSeconds(0.5);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
         }
 
-        public string MenuTitle
-        {
-            get { return menuTitle; }
-            set { menuTitle = value; }
-        }
+        public string MenuTitle { get; set; }
 
         public override void HandleInput(InputManager input)
         {
@@ -109,7 +105,7 @@ namespace MeatieroidsWindows
             for (int i = 0; i < menuEntries.Count; i++)
             {
                 MenuEntry menuEntry = menuEntries[i];
-                bool isSelected = IsActive && (i == selectedEntry);
+                bool isSelected = isActive && (i == selectedEntry);
                 menuEntry.Draw(this, menuItemPosition, isSelected, gameTime);
                 // increment the position vector for the next menu entry
                 menuItemPosition.Y += menuEntry.GetHeight(this) + menuDistance;

@@ -11,27 +11,32 @@ namespace MeatieroidsWindows
     {
         private float rotation = 0;
         private Vector2 Directing = new Vector2(0, -1);
-        InputManager inputManager = new InputManager();
+        private InputManager inputManager = new InputManager();
+
         public NetworkUserSprite(Texture2D textureImage, Vector2 position, Point frameSize, int collisionOffset, Point currentFrame,
             Point sheetSize, Vector2 speed)
             : base(textureImage, position, frameSize, collisionOffset, currentFrame, sheetSize, speed)
         {
         }
+
         public NetworkUserSprite(Texture2D textureImage, Vector2 position, Point frameSize, int collisionOffset, Point currentFrame,
             Point sheetSize, Vector2 speed, int millisecondsPerFrame) :
             base(textureImage, position, frameSize, collisionOffset, currentFrame, sheetSize, speed, millisecondsPerFrame)
         {
 
         }
+
         public override Vector2 direction
         {
             get {return position;}
         }
+
         public  Vector2 location
         {
             get { return position; }
             set { position = value; }
         }
+
         public float Rotation
         {
             get { return rotation; }
@@ -46,7 +51,7 @@ namespace MeatieroidsWindows
                 Color.White, rotation, new Vector2(frameSize.X / 2, frameSize.Y / 2), 1f, SpriteEffects.None, 0);
         }
 
-        public override Rectangle collisionRect
+        public override Rectangle CollisionRect
         {
             get
             {

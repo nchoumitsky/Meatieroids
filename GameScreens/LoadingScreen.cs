@@ -7,11 +7,11 @@ namespace MeatieroidsWindows
     // This screen provides a loading screen between two screens
     class LoadingScreen : GameScreen
     {
-        GameScreen[] screensToLoad;
-        bool otherScreensAreGone;
-        string LoadingMessage;
-        bool isNetworkGame;
-        NetworkManager netManager;
+        private GameScreen[] screensToLoad;
+        private bool otherScreensAreGone;
+        private string LoadingMessage;
+        private bool isNetworkGame;
+        private NetworkManager netManager;
 
         private LoadingScreen(ScreenManager screenManager, GameScreen[] screens)
         {
@@ -56,10 +56,10 @@ namespace MeatieroidsWindows
 
             if (isNetworkGame)
             {
-                if (netManager.currentState == NetworkState.LoggedIn)
+                if (netManager.CurrentState == NetworkState.LoggedIn)
                     netManager.StartNetworkGame();
 
-                else if (netManager.currentState == NetworkState.PlayerJoined)
+                else if (netManager.CurrentState == NetworkState.PlayerJoined)
                 {
                     // once the menu has transitioned away, draw the new screens being loaded
                     if (otherScreensAreGone)
@@ -98,7 +98,7 @@ namespace MeatieroidsWindows
             {
                 otherScreensAreGone = false;
 
-                if (netManager.currentState == NetworkState.CreatedSession)
+                if (netManager.CurrentState == NetworkState.CreatedSession)
                     netManager.CleanUpNetwork();
 
                 ScreenManager.AddScreen(new BackgroundScreen());
@@ -115,7 +115,7 @@ namespace MeatieroidsWindows
 
             if (isNetworkGame)
             {
-                if (netManager.currentState == NetworkState.CreatedSession)
+                if (netManager.CurrentState == NetworkState.CreatedSession)
                     LoadingMessage = "Waiting for opponent...";
                 else
                     LoadingMessage = "Signing in...";

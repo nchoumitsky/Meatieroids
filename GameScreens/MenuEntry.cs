@@ -7,14 +7,8 @@ namespace MeatieroidsWindows
     // this class represents an item in a menu
     class MenuEntry
     {
-        string displayText;
-
         /// Gets or sets the text of this menu entry.
-        public string DisplayText
-        {
-            get { return displayText; }
-            set { displayText = value; }
-        }
+        public string DisplayText { get; set; }
 
         // Event raised when the menu entry is selected. set in the menuscreen calling it.
         public event EventHandler<PlayerIndexEventArgs> Selected;
@@ -28,7 +22,7 @@ namespace MeatieroidsWindows
 
         public MenuEntry(string text)
         {
-            this.displayText = text;
+            this.DisplayText = text;
         }
 
         public virtual void Update(MenuScreen screen, bool isSelected, GameTime gameTime) {}
@@ -47,7 +41,7 @@ namespace MeatieroidsWindows
             SpriteFont font = screenManager.GameFont;
             Vector2 origin = new Vector2(0, font.LineSpacing / 2);
 
-            spriteBatch.DrawString(font, displayText, position, color, 0, origin, 1, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, DisplayText, position, color, 0, origin, 1, SpriteEffects.None, 0);
         }
 
         // gets how much space this menu entry requires.

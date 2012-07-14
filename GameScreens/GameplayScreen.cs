@@ -12,22 +12,22 @@ namespace MeatieroidsWindows
     // This screen implements the actual game logic.
     class GameplayScreen : GameScreen
     {
-        ContentManager content;
-        SpriteFont screenFont;
-        SpriteManager spriteManager;
-        SoundEffect splatEffect;
+        private ContentManager content;
+        private SpriteFont screenFont;
+        private SpriteManager spriteManager;
+        private SoundEffect splatEffect;
 
         // gameplay variables
-        int level = 1;
-        int score;
-        int diffuculty;
-        bool spawnIsReady;
+        private int level = 1;
+        private int score;
+        private int diffuculty;
+        private bool spawnIsReady;
 
         //screen item variables and config
-        Vector2 scorePosition;
-        Vector2 levelPosition;
-        Vector2 opponentScorePosition;
-        Color textColor = Color.LightGreen;
+        private Vector2 scorePosition;
+        private Vector2 levelPosition;
+        private Vector2 opponentScorePosition;
+        private Color textColor = Color.LightGreen;
 
         public GameplayScreen()
         {  
@@ -75,7 +75,7 @@ namespace MeatieroidsWindows
         {
             base.Update(gameTime, otherScreenHasFocus, coveredByOtherScreen);
 
-            if (IsActive) //if this is the active screen
+            if (isActive) //if this is the active screen
             {
                 //We check to see if we should spawn meat.  This should only occur after the nextLevel screen
                 //is exiting or the game is starting, in both multiplayer and single player.
@@ -108,7 +108,7 @@ namespace MeatieroidsWindows
             //if we are playing networked, let the other person know
             if (input.IsShootFork())
             {
-                spriteManager.fireForks();
+                spriteManager.FireForks();
             }
 
         }
@@ -151,7 +151,7 @@ namespace MeatieroidsWindows
         private void collisionDetection()
         {
             MeatSprite oldMeat;
-            if (spriteManager.collisionDetect(out oldMeat))
+            if (spriteManager.CollisionDetect(out oldMeat))
             {
                 if (score > ScreenManager.CurrentHighScore)
                     ScreenManager.CurrentHighScore = score;

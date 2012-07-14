@@ -10,10 +10,15 @@ namespace MeatieroidsWindows
 
     class LocalNetworkGameMenu : MenuScreen
     {
-        MenuEntry gameTypeOption, opt2, opt3, opt4, opt5, highScoreOption;
-        PlayerIndex currentPlayerIndex;
-        SignedInGamer currentGamer;
-        NetworkSession netSession;
+        private MenuEntry gameTypeOption;
+        private MenuEntry opt2;
+        private MenuEntry opt3;
+        private MenuEntry opt4;
+        private MenuEntry opt5;
+        private MenuEntry highScoreOption;
+        private PlayerIndex currentPlayerIndex;
+        private SignedInGamer currentGamer;
+        private NetworkSession netSession;
 
         public LocalNetworkGameMenu(PlayerIndex enteringPlayer, NetworkSession nSession)
             : base("Local Network Game Lobby")

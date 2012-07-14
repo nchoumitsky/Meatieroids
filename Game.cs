@@ -6,9 +6,9 @@ namespace MeatieroidsWindows
 {
     public class MeatieroidsGame : Microsoft.Xna.Framework.Game
     {
-        GraphicsDeviceManager graphics;
-        ScreenManager screenManager;
-        GamerServicesComponent gamerServices;
+        private GraphicsDeviceManager graphics;
+        private ScreenManager screenManager;
+        private GamerServicesComponent gamerServices;
 
         // The main game constructor.
         public MeatieroidsGame()

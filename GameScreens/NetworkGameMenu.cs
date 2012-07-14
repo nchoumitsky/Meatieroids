@@ -8,14 +8,14 @@ namespace MeatieroidsWindows
 {
     enum SessionProperty { GameMode, WinningScore }
     enum GameMode { HeadToHead, Other }
-    enum HighScore { FiftyThousand, Unlimited}
+    enum HighScore { FiftyThousand, Unlimited }
 
     class NetworkGameMenu : MenuScreen
     {
-        MenuEntry opt1;
-        PlayerIndex currentPlayerIndex;
-        SignedInGamer currentGamer;
-        NetworkSessionProperties netSessionProperties;
+        private MenuEntry opt1;
+        private PlayerIndex currentPlayerIndex;
+        private SignedInGamer currentGamer;
+        private NetworkSessionProperties netSessionProperties;
 
         public NetworkGameMenu(PlayerIndex enteringPlayer)
             : base("Start a network game")

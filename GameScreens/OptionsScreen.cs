@@ -8,16 +8,16 @@ namespace MeatieroidsWindows
 
     class OptionsScreen : MenuScreen
     {
-        enum Difficulties
+        private enum Difficulties
         {
             Easy,
             Normal,
             Hard,
         }
 
-        bool sound;
-        Difficulties currentDifficulty;
-        MenuEntry opt1, opt2, opt3;
+        private bool sound;
+        private Difficulties currentDifficulty;
+        private MenuEntry opt1, opt2, opt3;
 
         public OptionsScreen()
             : base("Game Options")

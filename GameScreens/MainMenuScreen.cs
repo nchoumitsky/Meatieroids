@@ -16,8 +16,8 @@ namespace MeatieroidsWindows
 
     class MainMenuScreen : MenuScreen
     {
-        string exitPrompt = "Are you sure you want to quit Meatieroids?";
-        string acceptPrompt = "Press Enter or A to exit the game";
+        private string exitPrompt = "Are you sure you want to quit Meatieroids?";
+        private string acceptPrompt = "Press Enter or A to exit the game";
 
         public MainMenuScreen() : base("Main Menu")
         {

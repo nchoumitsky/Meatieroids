@@ -17,25 +17,20 @@ namespace MeatieroidsWindows
     // user input to whatever the active screens are
     public class ScreenManager : DrawableGameComponent
     {
-        SpriteBatch spriteBatch;
-        SpriteFont gameFont;
-        Texture2D fadeTexture;
-        //IAsyncResult loadResult;
+        private SpriteBatch spriteBatch;
+        private SpriteFont gameFont;
+        private Texture2D fadeTexture;
 
         // lists of screens and screens waiting to be updated by the draw and update methods
-        List<GameScreen> screens = new List<GameScreen>();
-        List<GameScreen> screensToUpdate = new List<GameScreen>();
+        private List<GameScreen> screens = new List<GameScreen>();
+        private List<GameScreen> screensToUpdate = new List<GameScreen>();
 
         // user input handler for the game
-        InputManager userInput = new InputManager();
+        private InputManager userInput = new InputManager();
 
         // initialization flags for the screen manager
-        bool isInitialized;
-        bool isSoundEnabled;
-
-        // gamplay variables
-        int diffucultyLevel = 0;
-        int highScore = 0;
+        private bool isInitialized;
+        private bool isSoundEnabled;
 
         // public properties and game settings
         public SpriteBatch SpriteBatch
@@ -48,23 +43,11 @@ namespace MeatieroidsWindows
             get { return gameFont; }
         }
 
-        public int DiffucultyLevel
-        {
-            get { return diffucultyLevel; }
-            set { diffucultyLevel = value; }
-        }
+        public int DiffucultyLevel { get; set; }
 
-        public int CurrentHighScore
-        {
-            get { return highScore; }
-            set { highScore = value; }
-        }
+        public int CurrentHighScore { get; set; }
 
-        public bool SoundEnabled
-        {
-            get { return isSoundEnabled; }
-            set { isSoundEnabled = value; }
-        }
+        public bool SoundEnabled { get; set; }
 
         public GameScreen[] GetScreens()
         {
@@ -118,7 +101,7 @@ namespace MeatieroidsWindows
                 screen.UnloadContent();
         }
 
-        void StorageSaveCompletedCallback(IAsyncResult result)
+        private void StorageSaveCompletedCallback(IAsyncResult result)
         {
             StorageDevice device = Guide.EndShowStorageDeviceSelector(result);
             if (device.IsConnected)

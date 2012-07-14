@@ -11,17 +11,17 @@ namespace MeatieroidsWindows
 {
     class SearchLocalNetworkScreen : MenuScreen
     {
-        AvailableNetworkSessionCollection availableSessions;
-        MenuEntry returnEntry;
-        MenuEntry Games;
-        MenuEntry gameMode;
-        MenuEntry highScore;
-        MenuEntry joinGame;
-        int gameCount;
-        int totalGames;
+        private AvailableNetworkSessionCollection availableSessions;
+        private MenuEntry returnEntry;
+        private MenuEntry Games;
+        private MenuEntry gameMode;
+        private MenuEntry highScore;
+        private MenuEntry joinGame;
+        private int gameCount;
+        private int totalGames;
 
-        AvailableNetworkSession currentSessionSelected;
-        PlayerIndex currentPlayer;
+        private AvailableNetworkSession currentSessionSelected;
+        private PlayerIndex currentPlayer;
 
         public SearchLocalNetworkScreen(PlayerIndex playerIndex, AvailableNetworkSessionCollection availableSessions)
             : base("Local Network Game Search")

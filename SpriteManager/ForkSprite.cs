@@ -9,8 +9,8 @@ namespace MeatieroidsWindows
 {
     class ForkSprite : Sprite
     {
-        int lifeTime = 50;
-        float rotation;
+        private int lifeTime = 50;
+        private float rotation;
 
         public ForkSprite(Texture2D textureImage, Vector2 position, Point frameSize, int collisionOffset, Point currentFrame,
             Point sheetSize, Vector2 speed, float rotation) :
@@ -18,6 +18,7 @@ namespace MeatieroidsWindows
         {
             this.rotation = rotation;
         }
+
         public override Vector2 direction
         {
             get
@@ -28,6 +29,7 @@ namespace MeatieroidsWindows
                 return dir * speed;
             }
         }
+
         public override void Update(GameTime gameTime, Rectangle clientBounds)
         {
             position += direction;
@@ -43,10 +45,12 @@ namespace MeatieroidsWindows
                 position.Y -= (clientBounds.Height + frameSize.Y);
             base.Update(gameTime, clientBounds);
         }
-        public int getLifeTime()
+
+        public int GetLifeTime()
         {
             return lifeTime;
         }
+
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(textureImage, position,

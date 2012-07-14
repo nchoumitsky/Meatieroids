@@ -36,12 +36,12 @@ namespace MeatieroidsWindows
     {
         // The network manager maintains the network connection
         // and variables functions relevant to network play
-        NetworkState networkGameState;
-        NetworkSession networkSession;
-        AvailableNetworkSessionCollection gameSessions;
-        PacketWriter packetWriter;
-        PacketReader packetReader;
-        bool remoteIsReadyToPlay ;
+        private NetworkState networkGameState;
+        private NetworkSession networkSession;
+        private AvailableNetworkSessionCollection gameSessions;
+        private PacketWriter packetWriter;
+        private PacketReader packetReader;
+        private bool remoteIsReadyToPlay;
 
         public NetworkManager(NetworkSession netSession)
         {
@@ -63,7 +63,7 @@ namespace MeatieroidsWindows
             set { remoteIsReadyToPlay = value; }
         }
 
-        public NetworkState currentState
+        public NetworkState CurrentState
         {
             get { return networkGameState; }
         }

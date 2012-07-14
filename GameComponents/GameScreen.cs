@@ -16,23 +16,17 @@ namespace MeatieroidsWindows
 
     public abstract class GameScreen
     {
-        bool isPopup = false;
-        bool isExiting = false;
-        bool otherScreenHasFocus;
-        float transitionPosition = 1;
-        float transitionDelta = 1;
+        private bool otherScreenHasFocus;
+        private float transitionPosition = 1;
+        private float transitionDelta = 1;
 
-        TimeSpan transitionOnTime = TimeSpan.Zero;
-        TimeSpan transitionOffTime = TimeSpan.Zero;
-        ScreenState screenState = ScreenState.TransitionOn;
+        private TimeSpan transitionOnTime = TimeSpan.Zero;
+        private TimeSpan transitionOffTime = TimeSpan.Zero;
+        private ScreenState screenState = ScreenState.TransitionOn;
 
-        ScreenManager screenManager; 
+        private ScreenManager screenManager;
 
-        public bool IsPopupWindow
-        {
-            get { return isPopup; }
-            protected set { isPopup = value; }
-        }
+        public bool IsPopupWindow { get; set; }
 
         // gets the current state of this screen
         public ScreenState ScreenState
@@ -67,7 +61,7 @@ namespace MeatieroidsWindows
         }
 
         // checks if this screen is active
-        public bool IsActive
+        public bool isActive
         {
             get 
             { 
@@ -78,18 +72,10 @@ namespace MeatieroidsWindows
 
         // property representing if a screen is going away, if so the screen will remove itself
         // after its last draw/update has been called
-        public bool IsExiting
-        {
-            get { return isExiting; }
-            set { isExiting = value; }
-        }
+        public bool IsExiting { get; set; }
 
         // returns which ScreenManager this belongs to
-        public ScreenManager ScreenManager
-        {
-            get { return screenManager; }
-            set { screenManager = value; }
-        }
+        public ScreenManager ScreenManager { get; set; }
 
         // load and unload methods to be overridden by children instances 
         public virtual void LoadContent() { }
@@ -99,7 +85,7 @@ namespace MeatieroidsWindows
         {
             this.otherScreenHasFocus = otherScreenHasFocus;
 
-            if (isExiting) // the current screen is going away
+            if (IsExiting) // the current screen is going away
             {
                 screenState = ScreenState.TransitionOff;
 
@@ -158,7 +144,7 @@ namespace MeatieroidsWindows
         // removes the screen nicely, instead of just making it go away
         public void ExitScreen()
         {
-                isExiting = true;
+                IsExiting = true;
         }
     }
 }

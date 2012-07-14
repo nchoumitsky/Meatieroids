@@ -9,17 +9,20 @@ namespace MeatieroidsWindows
 {
     class ExplodingMeatSprite : Sprite
     {
-        int lifeTime = 22;
+        private int lifeTime = 22;
+
         public ExplodingMeatSprite(Texture2D textureImage, Vector2 position, Point frameSize, int collisionOffset, Point currentFrame,
             Point sheetSize, Vector2 speed)
             : base(textureImage, position, frameSize, collisionOffset, currentFrame, sheetSize, speed)
         {
         }
+
         public ExplodingMeatSprite(Texture2D textureImage, Vector2 position, Point frameSize, int collisionOffset, Point currentFrame,
             Point sheetSize, Vector2 speed, int millisecondsPerFrame) :
             base(textureImage, position, frameSize, collisionOffset, currentFrame, sheetSize, speed, millisecondsPerFrame)
         {
         }
+
         public override Vector2 direction
         {
             get { return speed; }

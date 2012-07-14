@@ -12,14 +12,14 @@ namespace MeatieroidsWindows
     // This screen implements the actual game logic.
     class SplashScreen : GameScreen
     {
-        ContentManager content;
-        SpriteFont gameFont;
+        private ContentManager content;
+        private SpriteFont gameFont;
 
-        String startMessage = "Press enter or A button to begin...";
-        String groupMessage = "A Pasta Adventure!";
-        Texture2D logo;
+        private String startMessage = "Press enter or A button to begin...";
+        private String groupMessage = "A Pasta Adventure!";
+        private Texture2D logo;
 
-        float textScale = 0.0f;
+        private float textScale = 0.0f;
 
         public SplashScreen()
         {

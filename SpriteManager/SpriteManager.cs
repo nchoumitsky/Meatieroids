@@ -11,27 +11,27 @@ namespace MeatieroidsWindows
 {
     class SpriteManager
     {
-        ContentManager content;
+        private ContentManager content;
         public UserControlledSprite player; 
         public NetworkUserSprite netPlayer;
         public List<MeatSprite> meatList = new List<MeatSprite>();
         public List<ForkSprite> forkList = new List<ForkSprite>();
         public List<ForkSprite> networkForkList = new List<ForkSprite>();
         public List<ExplodingMeatSprite> explodingList = new List<ExplodingMeatSprite>();
-        ScreenManager screenManager;
+        private ScreenManager screenManager;
         public List<Sprite> lifeList = new List<Sprite>();
 
-        int screenWidth;
-        int screenHeight;
-        int titleSafeLeft;
-        int titleSafeRight;
-        int titleSafeBottom;
-        int titleSafeTop;
-        int enemyMinSpeed = 1;
-        int enemyMaxSpeed = 3;
-        bool isNetworkGame;
-        NetworkManager netManager;
-        Random random = new Random();
+        private int screenWidth;
+        private int screenHeight;
+        private int titleSafeLeft;
+        private int titleSafeRight;
+        private int titleSafeBottom;
+        private int titleSafeTop;
+        private int enemyMinSpeed = 1;
+        private int enemyMaxSpeed = 3;
+        private bool isNetworkGame;
+        private NetworkManager netManager;
+        private Random random = new Random();
 
         public SpriteManager(ContentManager c, ScreenManager s)
         {
@@ -66,6 +66,7 @@ namespace MeatieroidsWindows
 #endif
 
         }
+
         public SpriteManager(ContentManager c, ScreenManager s, NetworkManager nManager)
         {
             isNetworkGame = true;
@@ -126,13 +127,13 @@ namespace MeatieroidsWindows
         }
 
 
-        public void fireForks()
+        public void FireForks()
         {
             forkList.Add(new ForkSprite(content.Load<Texture2D>(@"images\fork"), new Vector2(player.getPosition.X + 9, player.getPosition.Y - 10),
                  new Point(40, 75), 0, new Point(0, 0), new Point(0, 0), new Vector2(-12, -12), (player.getRotation)));
 
         }
-        public void fireNetworkForks()
+        public void FireNetworkForks()
         {
             networkForkList.Add(new ForkSprite(content.Load<Texture2D>(@"images\fork"), new Vector2(netPlayer.getPosition.X + 9, netPlayer.getPosition.Y - 10),
                  new Point(40, 75), 0, new Point(0, 0), new Point(0, 0), new Vector2(-12, -12), (netPlayer.Rotation)));
@@ -156,7 +157,7 @@ namespace MeatieroidsWindows
             for (int i = 0; i < forkList.Count; i++)
             {
                 ForkSprite f = forkList[i];
-                if (f.getLifeTime() == 0) //check to see if it has been fired recently or needs to be removed from the screen
+                if (f.GetLifeTime() == 0) //check to see if it has been fired recently or needs to be removed from the screen
                 {
                     forkList.RemoveAt(i);
                     --i;
@@ -183,7 +184,7 @@ namespace MeatieroidsWindows
                 for (int i = 0; i < networkForkList.Count; ++i)
                 {
                     ForkSprite f = networkForkList[i];
-                    if (f.getLifeTime() == 0) //check to see if it has been fired recently or needs to be removed from the screen
+                    if (f.GetLifeTime() == 0) //check to see if it has been fired recently or needs to be removed from the screen
                     {
                         networkForkList.RemoveAt(i);
                         --i;
@@ -193,14 +194,14 @@ namespace MeatieroidsWindows
 
         }
 
-        public bool collisionDetect(out MeatSprite oldMeat)
+        public bool CollisionDetect(out MeatSprite oldMeat)
         {
             oldMeat = null;
             for (int i = 0; i < meatList.Count; i++)
             {
                 //first check if the player is being hit
                 MeatSprite m = meatList[i];
-                if (m.collisionRect.Intersects(player.collisionRect))
+                if (m.CollisionRect.Intersects(player.CollisionRect))
                 {
                     oldMeat = meatList[i];
                     if (lifeList.Count > 0)
@@ -218,7 +219,7 @@ namespace MeatieroidsWindows
                 for (int j = 0; j < forkList.Count; j++)
                 {
                     ForkSprite f = forkList[j];
-                    if (m.collisionRect.Intersects(f.collisionRect))
+                    if (m.CollisionRect.Intersects(f.CollisionRect))
                     {
                         explodingList.Add(new ExplodingMeatSprite(content.Load<Texture2D>(@"images\explodingsheet"), new Vector2(m.getPosition.X - 50, m.getPosition.Y - 50),
                                new Point(200, 200), 0, new Point(2, 1), new Point(7, 1), new Vector2(0, 0)));
@@ -232,7 +233,7 @@ namespace MeatieroidsWindows
                 //Do the same for the networked player
                 if(isNetworkGame)
                 {
-                    if (m.collisionRect.Intersects(netPlayer.collisionRect))
+                    if (m.CollisionRect.Intersects(netPlayer.CollisionRect))
                       {
                         explodingList.Add(new ExplodingMeatSprite(content.Load<Texture2D>(@"images\explodingsheet"), new Vector2(m.getPosition.X - 50, m.getPosition.Y - 50),
                              new Point(200, 200), 0, new Point(2, 1), new Point(7, 1), new Vector2(0, 0)));
@@ -242,7 +243,7 @@ namespace MeatieroidsWindows
                     for (int j = 0; j < networkForkList.Count; ++j)
                     {
                         ForkSprite f = networkForkList[j];
-                        if(m.collisionRect.Intersects(f.collisionRect))
+                        if(m.CollisionRect.Intersects(f.CollisionRect))
                         {
                             explodingList.Add(new ExplodingMeatSprite(content.Load<Texture2D>(@"images\explodingsheet"), new Vector2(m.getPosition.X - 50, m.getPosition.Y - 50),
                              new Point(200, 200), 0, new Point(2, 1), new Point(7, 1), new Vector2(0, 0)));
@@ -297,6 +298,7 @@ namespace MeatieroidsWindows
                         netManager.SendLastMeat(position, speed);
             }
         }
+
         public void ExplosionSpawn(MeatSprite oldMeat)
         {
             int size = oldMeat.Size + 1;
