@@ -9,7 +9,6 @@ namespace MeatieroidsWindows
     {
         private List<MenuEntry> menuEntries = new List<MenuEntry>();
         private int selectedEntry = 0;
-        private string menuTitle;
 
         protected IList<MenuEntry> MenuEntries
         {
@@ -88,7 +87,7 @@ namespace MeatieroidsWindows
             // Draw the menu title and entries
             Vector2 menuItemPosition = new Vector2(100, 150);
             Vector2 titlePosition = new Vector2(view.Width / 2, view.Height / 9);
-            Vector2 titleOrigin = font.MeasureString(menuTitle) / 2;
+            Vector2 titleOrigin = font.MeasureString(MenuTitle) / 2;
             Color titleColor = Color.White * TransitionAlphaValue;
             float titleScale = 2f;
             float menuDistance = 20;
@@ -100,7 +99,7 @@ namespace MeatieroidsWindows
                 menuItemPosition.X -= transitionDelta * 256;
 
             spriteBatch.Begin();
-            spriteBatch.DrawString(font, menuTitle, titlePosition, titleColor, 0, titleOrigin, titleScale, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, MenuTitle, titlePosition, titleColor, 0, titleOrigin, titleScale, SpriteEffects.None, 0);
 
             for (int i = 0; i < menuEntries.Count; i++)
             {
