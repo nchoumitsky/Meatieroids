@@ -42,11 +42,11 @@ namespace MeatieroidsWindows
         {
             SpriteBatch spriteBatch = ScreenManager.SpriteBatch;
             Viewport viewport = ScreenManager.GraphicsDevice.Viewport;
-            byte fade = TransitionAlphaValue;
+            Color drawColor = overlayColor * TransitionAlphaValue;
 
             // draw the background
-            spriteBatch.Begin(SpriteBlendMode.AlphaBlend);
-            spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, viewport.Width, viewport.Height), new Color(overlayColor, fade));
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+            spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, viewport.Width, viewport.Height), drawColor);
             spriteBatch.End();
         }
     }

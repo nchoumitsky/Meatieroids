@@ -50,11 +50,11 @@ namespace MeatieroidsWindows
             new Point(156, 128), 10, new Point(1, 1), new Point(4, 1), new Vector2(6, 6), 120);
 
 #if(XBOX360)           
-            lifeList.Add(new MeatSprite(content.Load<Texture2D>(@"images\parm"), new Vector2(titleSafeRight - 65, titleSafeTop + 10),
+            lifeList.Add(new MeatSprite(content.Load<Texture2D>(@"images\parm"), 0, new Vector2(titleSafeRight - 65, titleSafeTop + 10),
                                 new Point(65, 65), 0, new Point(0, 0), new Point(0, 0), new Vector2(0, 0)));
-            lifeList.Add(new MeatSprite(content.Load<Texture2D>(@"images\parm"), new Vector2(titleSafeRight - 65, titleSafeTop + 80),
+            lifeList.Add(new MeatSprite(content.Load<Texture2D>(@"images\parm"), 0, new Vector2(titleSafeRight - 65, titleSafeTop + 80),
                                 new Point(65, 65), 0, new Point(0, 0), new Point(0, 0), new Vector2(0, 0)));
-            lifeList.Add(new MeatSprite(content.Load<Texture2D>(@"images\parm"), new Vector2(titleSafeRight - 65, titleSafeTop + 150),
+            lifeList.Add(new MeatSprite(content.Load<Texture2D>(@"images\parm"), 0, new Vector2(titleSafeRight - 65, titleSafeTop + 150),
                                 new Point(65, 65), 0, new Point(0, 0), new Point(0, 0), new Vector2(0, 0)));
 #else
             lifeList.Add(new MeatSprite(content.Load<Texture2D>(@"images\parm"), 0, new Vector2(titleSafeRight - 100, titleSafeTop + 30),
@@ -109,11 +109,11 @@ namespace MeatieroidsWindows
                 new Point(156, 128), 10, new Point(1, 1), new Point(4, 1), new Vector2(6, 6), 120);
 
 #if(XBOX360)           
-            lifeList.Add(new MeatSprite(content.Load<Texture2D>(@"images\parm"), new Vector2(titleSafeRight - 65, titleSafeTop + 10),
+            lifeList.Add(new MeatSprite(content.Load<Texture2D>(@"images\parm"), 0, new Vector2(titleSafeRight - 65, titleSafeTop + 10),
                                 new Point(65, 65), 0, new Point(0, 0), new Point(0, 0), new Vector2(0, 0)));
-            lifeList.Add(new MeatSprite(content.Load<Texture2D>(@"images\parm"), new Vector2(titleSafeRight - 65, titleSafeTop + 80),
+            lifeList.Add(new MeatSprite(content.Load<Texture2D>(@"images\parm"), 0, new Vector2(titleSafeRight - 65, titleSafeTop + 80),
                                 new Point(65, 65), 0, new Point(0, 0), new Point(0, 0), new Vector2(0, 0)));
-            lifeList.Add(new MeatSprite(content.Load<Texture2D>(@"images\parm"), new Vector2(titleSafeRight - 65, titleSafeTop + 150),
+            lifeList.Add(new MeatSprite(content.Load<Texture2D>(@"images\parm"), 0, new Vector2(titleSafeRight - 65, titleSafeTop + 150),
                                 new Point(65, 65), 0, new Point(0, 0), new Point(0, 0), new Vector2(0, 0)));
 #else
             lifeList.Add(new MeatSprite(content.Load<Texture2D>(@"images\parm"), 0, new Vector2(titleSafeRight - 100, titleSafeTop + 30),
@@ -303,7 +303,7 @@ namespace MeatieroidsWindows
         {
             int size = oldMeat.Size + 1;
             Vector2 oldDirection = oldMeat.direction;
-            Vector2 newSpeed1, newSpeed2, speed1, speed2;
+            Vector2 newSpeed1 = new Vector2(), newSpeed2 = new Vector2(), speed1, speed2;
             
             //rotation for the new meat
             float r = (2 * (float) Math.PI) / 8;

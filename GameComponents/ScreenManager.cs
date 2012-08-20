@@ -76,7 +76,7 @@ namespace MeatieroidsWindows
             gameFont = content.Load<SpriteFont>("menufont");
             fadeTexture = content.Load<Texture2D>("images/blankBG");
 
-            Guide.BeginShowStorageDeviceSelector(PlayerIndex.One, StorageLoadCompletedCallback, null);
+            StorageDevice.BeginShowSelector(PlayerIndex.One, StorageLoadCompletedCallback, null);
 
             // Tell each of the screens to load their content.
             foreach (GameScreen Screen in screens)
@@ -85,7 +85,8 @@ namespace MeatieroidsWindows
 
         void StorageLoadCompletedCallback(IAsyncResult result)
         {
-            StorageDevice device = Guide.EndShowStorageDeviceSelector(result);
+            StorageDevice device = StorageDevice.EndShowSelector(result);
+
             int score = new int();
             if (device.IsConnected)
             {
@@ -96,14 +97,14 @@ namespace MeatieroidsWindows
 
         protected override void UnloadContent()
         {
-            Guide.BeginShowStorageDeviceSelector(PlayerIndex.One, StorageSaveCompletedCallback, null);
+            StorageDevice.BeginShowSelector(PlayerIndex.One, StorageSaveCompletedCallback, null);
             foreach (GameScreen screen in screens)
                 screen.UnloadContent();
         }
 
         private void StorageSaveCompletedCallback(IAsyncResult result)
         {
-            StorageDevice device = Guide.EndShowStorageDeviceSelector(result);
+            StorageDevice device = StorageDevice.EndShowSelector(result);
             if (device.IsConnected)
             {
                 ScreenManager.DoSaveGame(device, CurrentHighScore);
@@ -192,7 +193,6 @@ namespace MeatieroidsWindows
             spriteBatch.End();
         }
 
-        [Serializable]
         public struct SaveGameData
         {
             public int Score;
@@ -204,12 +204,15 @@ namespace MeatieroidsWindows
             SaveGameData data = new SaveGameData();
             data.Score = scoreToSave;
 
+            IAsyncResult res = device.BeginOpenContainer("Meatieroids", null, null);
+
+            res.AsyncWaitHandle.WaitOne();
+
             // Open a storage container.
-            StorageContainer container =
-                device.OpenContainer("Meatieroids");
+            StorageContainer container = device.EndOpenContainer(res);
 
             // Get the path of the save game.
-            string filename = Path.Combine(container.Path, "hiscore.sav");
+            string filename = "hiscore.sav";
 
             // Open the file, creating it if necessary.
             FileStream stream = File.Open(filename, FileMode.OpenOrCreate);
@@ -229,11 +232,13 @@ namespace MeatieroidsWindows
         private static void DoLoadGame(StorageDevice device, ref int score)
         {
             // Open a storage container.
-            StorageContainer container =
-                device.OpenContainer("Meatieroids");
+            IAsyncResult res = device.BeginOpenContainer("Meatieroids", null, null);
+            res.AsyncWaitHandle.WaitOne();
+
+            StorageContainer container = device.EndOpenContainer(res);
 
             // Get the path of the save game.
-            string filename = Path.Combine(container.Path, "hiscore.sav");
+            string filename = "hiscore.sav";
 
             // Check to see whether the save exists.
             if (!File.Exists(filename))

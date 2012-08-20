@@ -89,7 +89,7 @@ namespace MeatieroidsWindows
             Vector2 menuItemPosition = new Vector2(100, 150);
             Vector2 titlePosition = new Vector2(view.Width / 2, view.Height / 9);
             Vector2 titleOrigin = font.MeasureString(menuTitle) / 2;
-            Color titleColor = new Color(Color.White, TransitionAlphaValue);
+            Color titleColor = Color.White * TransitionAlphaValue;
             float titleScale = 2f;
             float menuDistance = 20;
 
